@@ -1,5 +1,4 @@
 const router =  require('express').Router();
-const productos =  require('../db/Schemas/productos');
 const biblioteca = require('../db/Schemas/biblioteca');
 
 
@@ -28,19 +27,28 @@ router.get('/',(req,res)=>{
 })
 
 
+// obtener libros
 router.get('/libros',(req,res)=>{
-res.json("libros")
+res.json("Todo los libros ")
 })
 
 
 // crear un libro
-router.get('/libros',(req,res)=>{
-    res.json("libros")
-    })
+router.get('/crear',(req,res)=>{
+    const nuevoLibro = biblioteca({})
+    nuevoLibro.save()
+    res.json(" crear un libro")
+})
 
 // borrar un libros 
+router.delete('/libros',(req,res)=>{
+    res.json("Eliminar un libro")
+})
 
 // actualizar un libros
+router.put('/libros',(req,res)=>{
+    res.json("Actualizar libros")
+})
 
 
 

@@ -10,12 +10,6 @@ const jwt = require("jsonwebtoken");
 
 const rutasProtegidas = express.Router();
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const validarRouter = require("./routes/validar");
-const administracionRouter = require("./routes/administracion");
-const ProductoRouter = require("./routes/productos");
-const VentasRouter = require("./routes/ventas");
 const biblioteca = require("./routes/biblioteca")
 const baseUrl = "http://localhost:3000";
 
@@ -67,15 +61,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
-app.use("/users", cors(), usersRouter);
-app.use("/validate", cors(), validarRouter);
-app.use("/administracion", cors(), administracionRouter);
-app.use("/productos", cors(), ProductoRouter);
-app.use("/ventas", VentasRouter);
+
 app.use("/biblioteca",biblioteca )
 
 
-app.use("/", indexRouter);
 
 console.log(app.get("llave"));
 
