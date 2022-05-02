@@ -16,7 +16,7 @@ const validarRouter = require("./routes/validar");
 const administracionRouter = require("./routes/administracion");
 const ProductoRouter = require("./routes/productos");
 const VentasRouter = require("./routes/ventas");
-
+const biblioteca = require("./routes/biblioteca")
 const baseUrl = "http://localhost:3000";
 
 var whitelist = [baseUrl];
@@ -72,8 +72,8 @@ app.use("/validate", cors(), validarRouter);
 app.use("/administracion", cors(), administracionRouter);
 app.use("/productos", cors(), ProductoRouter);
 app.use("/ventas", VentasRouter);
+app.use("/biblioteca",biblioteca )
 
-app.use(rutasProtegidas);
 
 app.use("/", indexRouter);
 
