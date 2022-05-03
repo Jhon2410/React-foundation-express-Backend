@@ -1,5 +1,15 @@
 const router = require("express").Router();
 const biblioteca = require("../db/Schemas/biblioteca");
+const path = require("path");
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: path.join("public/img"),
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage, dest: path.join("/public/img") });
 
 router.get("/", (req, res) => {
   biblioteca
@@ -15,15 +25,18 @@ router.get("/", (req, res) => {
     });
 });
 
+
 // obtener un libros
 router.get("/libros", (req, res) => {
   res.json("Todo los libros ");
 });
 
 // crear un libro
-router.get("/crear", (req, res) => {
-  const {titulo, caratula , descripcion , contenido} =  req.body;
-  const nuevoLibro = biblioteca({titulo, caratula, descripcion, contenido});
+router.post("/crear", upload.single("caratula"), (req, res) => {
+  const { titulo, descripcion, contenido } = req.body;
+  const caratula = req.file.filename;
+  console.log(caratula)
+  const nuevoLibro = biblioteca({ titulo, caratula, descripcion });
   nuevoLibro.save();
   biblioteca
     .find({})
